@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModGuard Dashboard</title>
+    <link rel="stylesheet" href="/dashboard/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>ModGuard</h1>
+            <span class="subtitle">Content Moderation Dashboard</span>
+            <div class="connection-status" id="connectionStatus">
+                <span class="status-dot disconnected"></span>
+                <span>Disconnected</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Stats Cards -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Processed</div>
+                <div class="stat-value" id="totalProcessed">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Approval Rate</div>
+                <div class="stat-value" id="approvalRate">0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Avg Confidence</div>
+                <div class="stat-value" id="avgConfidence">0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Flagged Rate</div>
+                <div class="stat-value" id="flaggedRate">0%</div>
+            </div>
+        </section>
+
+        <!-- Moderation Input -->
+        <section class="input-section">
+            <h2>Test Moderation</h2>
+            <div class="input-group">
+                <textarea id="moderationInput" placeholder="Enter text to moderate..." rows="3"></textarea>
+                <button id="moderateBtn" onclick="submitModeration()">Moderate</button>
+            </div>
+        </section>
+
+        <!-- Charts -->
+        <section class="charts-grid">
+            <div class="chart-card">
+                <h3>Decision Distribution</h3>
+                <canvas id="decisionChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Confidence Distribution</h3>
+                <canvas id="confidenceChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Live Feed -->
+        <section class="feed-section">
+            <h2>Live Feed</h2>
+            <div class="feed-list" id="feedList">
+                <div class="feed-empty">No moderation results yet. Submit text above or send via API.</div>
+            </div>
+        </section>
+
+        <!-- Detail Modal -->
+        <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+            <div class="modal" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h3>Moderation Detail</h3>
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>ModGuard v0.1.0 | Multi-layered AI Content Moderation</p>
+    </footer>
+
+    <script src="/dashboard/app.js"></script>
+</body>
+</html>
